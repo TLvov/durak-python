@@ -2,10 +2,13 @@ class Game:
     def __init__(self, deck):
         from card import deal_cards
         self.trump = deck[-1].suit
+        for card in deck:
+            if card.suit == self.trump:
+                card.value += 9
         print(f"Trump is: {str(self.trump)}\n")
         self.attacker, self.defender, self.deck = deal_cards(
             deck, self.trump)
-        winner = self._play_game()
+        self.winner = self._play_game()
 
     # Function in charge of managing multiple rounds.
     # Returns who the winner is.

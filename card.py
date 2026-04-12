@@ -24,15 +24,10 @@ class Card:
     def __init__(self, rank: Rank, suit: Suit):
         self.rank = rank
         self.suit = suit
+        self.value = int(rank)
 
     def __str__(self):
         return f"{str(self.rank)} {str(self.suit)}"
-
-    def value(self, trump: Suit):
-        value = int(self.rank)
-        if self.suit == trump:
-            value += 9
-        return value
 
 
 def initialize_deck():
@@ -78,6 +73,6 @@ def deal_cards(cards: list[Card], trump: Suit):
 def _lowest_held_trump(hand: list[Card], trump: Suit):
     lowest_trump = 19
     for card in hand:
-        if card.suit == trump and card.value(trump) < lowest_trump:
-            lowest_trump = card.value(trump)
+        if card.suit == trump and card.value < lowest_trump:
+            lowest_trump = card.value
     return lowest_trump
