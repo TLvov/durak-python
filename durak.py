@@ -1,22 +1,25 @@
 def main():
     from card import initialize_deck
     from game import Game
-    from players import Player
+    from players import Player, Enemy
 
     playing = True
     while playing:
         cards = initialize_deck()
         game = Game(cards)
-        if game.winner is Player:
-            print("You have won!")
+        winner = game.play_game()
+        if type(winner) is Player:
+            print("\nYou have won!")
+        elif type(winner) is Enemy:
+            print("\nYou have lost...")
         else:
-            print("You have lost...")
+            print("\nIt was a tie!")
         playing = play_again()
 
 
 def play_again():
     while True:
-        yes_no = input("Would you like to play again? Y/N: ")
+        yes_no = input("\nWould you like to play again? Y/N: ")
         if yes_no == "Y":
             return True
         if yes_no == "N":

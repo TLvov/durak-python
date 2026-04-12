@@ -66,8 +66,7 @@ def deal_cards(cards: list[Card], trump: Suit):
     lowest_enemy_trump = _lowest_held_trump(enemy_hand, trump)
     if lowest_enemy_trump < lowest_player_trump:
         return Enemy(enemy_hand), Player(player_hand), cards
-    else:
-        return Player(player_hand), Enemy(enemy_hand), cards
+    return Player(player_hand), Enemy(enemy_hand), cards
 
 
 def _lowest_held_trump(hand: list[Card], trump: Suit):
