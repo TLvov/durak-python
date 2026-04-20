@@ -6,7 +6,7 @@ A text version of the traditional Russian card game **Durak**.
 I wrote this program as a capstone project for the Sigma Labs pre-course to showcase my python skills.
 
 ## How to run
-Download all .py files and run durak.py
+Download durak.py and resources folder, run durak.py
 
 ## What is Durak?
 [Wikipedia page](https://en.wikipedia.org/wiki/Durak)
