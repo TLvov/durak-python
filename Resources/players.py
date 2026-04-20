@@ -97,7 +97,7 @@ class Player:
 
     def draw_to_six(self, deck):
         if len(self.hand) == 0 and len(deck) == 0:
-            return True, deck
+            return True
 
         cards_picked_up = 0
         while len(self.hand) < 6 and len(deck) > 0:
@@ -107,7 +107,7 @@ class Player:
         if type(self) == Player:
             addressing = "You have"
         print(f"{addressing} picked up {cards_picked_up} card(s), there are {len(deck)} card(s) remaining in the deck\n")
-        return False, deck
+        return False
 
     def pickup_pile(self, pile):
         self.hand += pile
@@ -167,10 +167,9 @@ def _get_valid_input(prompt: str, lowest_choice: int, highest_choice: int):
 
 
 def _get_ranks_played(cards_played):
-    ranks_played = []
+    ranks_played = {enumerate}
 
     for card in cards_played:
-        if not (card.rank in ranks_played):
-            ranks_played.append(card.rank)
+        ranks_played.add(card.rank)
 
     return ranks_played

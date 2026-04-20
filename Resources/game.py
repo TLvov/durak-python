@@ -1,13 +1,14 @@
 class Game:
     def __init__(self, deck):
-        from card import deal_cards
+        from Resources.card import deal_cards
         self.trump = deck[-1].suit
-        for card in deck:
+        self.deck = deck
+        for card in self.deck:
             if card.suit == self.trump:
                 card.value += 9
         print(f"Trump is: {str(self.trump)}\n")
-        self.attacker, self.defender, self.deck = deal_cards(
-            deck, self.trump)
+        self.attacker, self.defender = deal_cards(
+            self.deck, self.trump)
 
     # Function in charge of managing multiple rounds.
     # Returns who the winner is.
@@ -49,8 +50,8 @@ class Game:
         return self._play_round(cards_played)
 
     def _discard(self):
-        attacker_won, self.deck = self.attacker.draw_to_six(self.deck)
-        defender_won, self.deck = self.defender.draw_to_six(self.deck)
+        attacker_won = self.attacker.draw_to_six(self.deck)
+        defender_won = self.defender.draw_to_six(self.deck)
         return attacker_won or defender_won, True
 
     def _pickup(self, cards_played):

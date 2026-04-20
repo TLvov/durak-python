@@ -12,12 +12,18 @@ class Rank(IntEnum):
     KING = 8
     ACE = 9
 
+    def __str__(self):
+        return f'{self.name}'
+
 
 class Suit(IntEnum):
     SPADE = 1
     HEART = 2
     CLUB = 3
     DIAMOND = 4
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Card:
@@ -27,12 +33,13 @@ class Card:
         self.value = int(rank)
 
     def __str__(self):
-        return f"{str(self.rank)} {str(self.suit)}"
+        return f"{str(self.rank)} of {str(self.suit)}"
 
 
 def initialize_deck():
     cards = _generate_cards()
-    return _shuffle_cards(cards)
+    _shuffle_cards(cards)
+    return cards
 
 
 def _generate_cards():
@@ -50,11 +57,10 @@ def _shuffle_cards(cards: list[Card]):
         j = randint(0, i)
 
         cards[i], cards[j] = cards[j], cards[i]
-    return cards
 
 
 def deal_cards(cards: list[Card], trump: Suit):
-    from players import Player, Enemy
+    from Resources.players import Player, Enemy
     player_hand = []
     enemy_hand = []
     for i in range(12):
@@ -65,8 +71,8 @@ def deal_cards(cards: list[Card], trump: Suit):
     lowest_player_trump = _lowest_held_trump(player_hand, trump)
     lowest_enemy_trump = _lowest_held_trump(enemy_hand, trump)
     if lowest_enemy_trump < lowest_player_trump:
-        return Enemy(enemy_hand), Player(player_hand), cards
-    return Player(player_hand), Enemy(enemy_hand), cards
+        return Enemy(enemy_hand), Player(player_hand)
+    return Player(player_hand), Enemy(enemy_hand)
 
 
 def _lowest_held_trump(hand: list[Card], trump: Suit):

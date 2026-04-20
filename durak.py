@@ -1,7 +1,7 @@
 def main():
-    from card import initialize_deck
-    from game import Game
-    from players import Player, Enemy
+    from Resources.card import initialize_deck
+    from Resources.game import Game
+    from Resources.players import Player, Enemy
 
     playing = True
     while playing:
